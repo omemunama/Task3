@@ -70,8 +70,8 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:textAlignment="center"
-            android:autoLink="all"
-            android:linksClickable="true"/>
+            android:onClick="register"
+            android:linksClickable="true" />
 
     </LinearLayout>
 

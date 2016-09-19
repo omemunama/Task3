@@ -1,6 +1,7 @@
 package nursulaeman.task3;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,14 +14,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
-        TextView txtView = (TextView) findViewById(R.id.tv_reg);
-        txtView.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-    */
+
+        TextView tv_reg = (TextView) findViewById(R.id.tv_reg);
+        tv_reg.setPaintFlags(tv_reg.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+    }
+
+    public void register (View v)
+    {
+        Intent i=new Intent();
+        i.setClass(this,RegisterActivity.class);
+        startActivity(i);
     }
 }
