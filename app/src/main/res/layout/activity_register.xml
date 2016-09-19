@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/yellow1"
     android:orientation="vertical"
-    tools:context="nursulaeman.task3.MainActivity">
+    tools:context="nursulaeman.task3.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
 
         <TextView
             style="@style/tv_st_1"
-            android:text="Login Page" />
+            android:text="Register Page" />
 
     </LinearLayout>
 
@@ -27,24 +27,32 @@
         android:background="@drawable/shape1"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/ti_st_1">
+        <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
 
             <EditText
                 android:id="@+id/et1"
                 style="@style/et_st_1"
-                android:hint="Email"/>
+                android:hint="Email" />
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/ti_st_1">
+        <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
 
             <EditText
                 android:id="@+id/et2"
                 style="@style/et_st_1"
                 android:hint="Password"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
+
+            <EditText
+                android:id="@+id/et3"
+                style="@style/et_st_1"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -62,16 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="Login" />
-
-        <TextView
-            android:id="@+id/tv_reg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:textAlignment="center"
-            android:autoLink="all"
-            android:linksClickable="true"/>
+            android:text="Register" />
 
     </LinearLayout>
 
