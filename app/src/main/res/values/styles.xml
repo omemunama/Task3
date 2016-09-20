@@ -32,5 +32,16 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/white</item>
     </style>
-    
+
+    <style name="tv_st_2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">italic|italic</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:onClick">register</item>
+        <item name="android:linksClickable">true</item>
+    </style>
+
 </resources>
