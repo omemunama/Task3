@@ -6,9 +6,17 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
@@ -16,6 +24,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
     Button btn_register;
+    TextView tv_result, tv_result_api;
+    EditText et_email;
+    int used;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText pass1 = (EditText) findViewById(R.id.et_reg_2);
         final EditText pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
+        tv_result = (TextView) findViewById(R.id.tv_result);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
                     pass2.requestFocus();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Input Success", Toast.LENGTH_LONG).show();
+                    getApi();
                 }
             }
         });
@@ -51,6 +64,54 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    private void getApi() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://private-6d28c-task32.apiary-mock.com/users/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        UserApi user_api = retrofit.create(UserApi.class);
+
+        // // implement interface for get all user
+        Call<Users> call = user_api.getUsers();
+        call.enqueue(new Callback<Users>() {
+
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+                int status = response.code();
+                tv_result.setText(String.valueOf(status));
+                //this extract data from retrofit with for() loop
+                for(Users.UserItem user : response.body().getUsers()) {
+                    tv_result_api.append(
+                            "Id = " + String.valueOf(user.getId()) +
+                                    System.getProperty("line.separator") +
+                                    "Email = " + user.getEmail() +
+                                    System.getProperty("line.separator") +
+                                    "Name = " + user.getName() +
+                                    System.getProperty("line.separator") +
+                                    "Password = " + user.getPassword() +
+                                    System.getProperty("line.separator")
+                    );
+                    if (user.getEmail().toString().equals(et_email.getText().toString())) {
+                        used = used + 1;
+                    }
+                }
+                if (used > 0){
+                    Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+                tv_result.setText(String.valueOf(t));
+            }
+        });
     }
 
 }
