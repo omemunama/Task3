@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!validatePass1(pass1.getText().toString())) {
                     pass1.setError("Invalid Password");
                     pass1.requestFocus();
-                } else if (!pass2.equals(pass1)) {
+                } else if (!pass2.getText().toString().equals(pass1.getText().toString())) {
                     pass2.setError("Invalid Password Confirmation");
                     pass2.requestFocus();
                 } else {
