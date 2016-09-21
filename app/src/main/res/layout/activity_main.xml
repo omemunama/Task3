@@ -31,7 +31,7 @@
             style="@style/ti_st_1">
 
             <EditText
-                android:id="@+id/et1"
+                android:id="@+id/et_log_1"
                 style="@style/et_st_1"
                 android:hint="Email"/>
 
@@ -58,6 +58,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
