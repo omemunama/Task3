@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
     Button btn_register;
     TextView tv_result, tv_result_api;
-    EditText et_email;
+    EditText email, pass1, pass2;
     int used;
 
     @Override
@@ -35,16 +35,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAwesomeValidation.addValidation(RegisterActivity.this, R.id.et_reg_1, Patterns.EMAIL_ADDRESS, R.string.err_email);
         mAwesomeValidation.addValidation(RegisterActivity.this, R.id.et_reg_4, "[a-zA-Z\\s]+", R.string.err_name);
-        final EditText pass1 = (EditText) findViewById(R.id.et_reg_2);
-        final EditText pass2 = (EditText) findViewById(R.id.et_reg_3);
+        email = (EditText) findViewById(R.id.et_reg_1);
+        pass1 = (EditText) findViewById(R.id.et_reg_2);
+        pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
         tv_result = (TextView) findViewById(R.id.tv_result);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAwesomeValidation.validate();
-                if (!validatePass1(pass1.getText().toString())) {
+                if (!mAwesomeValidation.validate()) {
+                    email.requestFocus();
+                }
+                else if (!validatePass1(pass1.getText().toString())) {
                     pass1.setError("Invalid Password");
                     pass1.requestFocus();
                 } else if (!pass2.getText().toString().equals(pass1.getText().toString())) {
@@ -96,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     "Password = " + user.getPassword() +
                                     System.getProperty("line.separator")
                     );
-                    if (user.getEmail().toString().equals(et_email.getText().toString())) {
+                    if (user.getEmail().toString().equals(email.getText().toString())) {
                         used = used + 1;
                     }
                 }

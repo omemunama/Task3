@@ -70,6 +70,10 @@
             style="@style/tv_st_2"
             android:text="Register" />
 
+        <TextView
+            android:id="@+id/tv_regres"
+            style="@style/tv_st_2" />
+
     </LinearLayout>
 
 </LinearLayout>
