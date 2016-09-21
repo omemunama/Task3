@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Task3</string>
     <string name="err_email">Invalid Email</string>
+    <string name="err_name">Invalid Name</string>
 </resources>

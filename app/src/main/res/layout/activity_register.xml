@@ -39,6 +39,15 @@
         <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
 
             <EditText
+                android:id="@+id/et_reg_4"
+                style="@style/et_st_1"
+                android:hint="Name" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
+
+            <EditText
                 android:id="@+id/et_reg_2"
                 style="@style/et_st_1"
                 android:hint="Password"

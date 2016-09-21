@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAwesomeValidation.addValidation(RegisterActivity.this, R.id.et_reg_1, Patterns.EMAIL_ADDRESS, R.string.err_email);
+        mAwesomeValidation.addValidation(RegisterActivity.this, R.id.et_reg_4, "[a-zA-Z\\s]+", R.string.err_name);
         final EditText pass1 = (EditText) findViewById(R.id.et_reg_2);
         final EditText pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
@@ -45,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     protected boolean validatePass1(String pass1) {
-        if (pass1 != null && pass1.length() > 0) {
+        if (pass1 != null && pass1.length() > 7) {
             return true;
         } else {
             return false;
