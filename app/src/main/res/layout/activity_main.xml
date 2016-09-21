@@ -41,7 +41,7 @@
             style="@style/ti_st_1">
 
             <EditText
-                android:id="@+id/et2"
+                android:id="@+id/et_log_2"
                 style="@style/et_st_1"
                 android:hint="Password"
                 android:inputType="textPassword"/>
