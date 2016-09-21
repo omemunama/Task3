@@ -30,7 +30,7 @@
         <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
 
             <EditText
-                android:id="@+id/et1"
+                android:id="@+id/et_reg_1"
                 style="@style/et_st_1"
                 android:hint="Email" />
 
@@ -39,7 +39,7 @@
         <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
 
             <EditText
-                android:id="@+id/et2"
+                android:id="@+id/et_reg_2"
                 style="@style/et_st_1"
                 android:hint="Password"
                 android:inputType="textPassword" />
@@ -49,7 +49,7 @@
         <android.support.design.widget.TextInputLayout style="@style/ti_st_1">
 
             <EditText
-                android:id="@+id/et3"
+                android:id="@+id/et_reg_3"
                 style="@style/et_st_1"
                 android:hint="Confirm Password"
                 android:inputType="textPassword" />
@@ -66,6 +66,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
