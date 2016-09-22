@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
     Button btn_register;
     TextView tv_respond;
     EditText email, pass1, pass2;
-    int used;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
         tv_respond = (TextView) findViewById(R.id.tv_respond);
-        //tv_result_api = (TextView) findViewById(R.id.tv_result_api);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,13 +89,12 @@ public class RegisterActivity extends AppCompatActivity {
                 //this extract data from retrofit with for() loop
                 for(Users.UserItem user : response.body().getUsers()) {
                     if (user.getEmail().toString().equals(email.getText().toString())) {
-                        used = used + 1;
+                        Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
+                        break;
+                    } else {
+                    // implement interface for add user
+                        Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
                     }
-                }
-                if (used > 0){
-                    Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
                 }
             }
 
