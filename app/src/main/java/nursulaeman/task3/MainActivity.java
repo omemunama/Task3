@@ -106,8 +106,11 @@ public class MainActivity extends AppCompatActivity {
                     login = false;
                     if (user.getEmail().toString().equals(email.getText().toString()) &&
                             user.getPassword().toString().equals(pass.getText().toString())) {
+                        Toast.makeText(MainActivity.this, "email password valid", Toast.LENGTH_LONG).show();
                         login = true;
                         break;
+                    } else {
+                        Toast.makeText(MainActivity.this, "invalid email password", Toast.LENGTH_LONG).show();
                     }
                 }
             }
