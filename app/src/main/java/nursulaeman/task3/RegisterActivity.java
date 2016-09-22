@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
     Button btn_register;
-    TextView tv_respond, tv_result_api;
+    TextView tv_respond;
     EditText email, pass1, pass2;
     int used;
 
@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
         tv_respond = (TextView) findViewById(R.id.tv_respond);
+        //tv_result_api = (TextView) findViewById(R.id.tv_result_api);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,17 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                 int status = response.code();
                 tv_respond.setText(String.valueOf(status));
                 //this extract data from retrofit with for() loop
-                /*for(Users.UserItem user : response.body().getUsers()) {
-                    tv_result_api.append(
-                            "Id = " + String.valueOf(user.getId()) +
-                                    System.getProperty("line.separator") +
-                                    "Email = " + user.getEmail() +
-                                    System.getProperty("line.separator") +
-                                    "Name = " + user.getName() +
-                                    System.getProperty("line.separator") +
-                                    "Password = " + user.getPassword() +
-                                    System.getProperty("line.separator")
-                    );
+                for(Users.UserItem user : response.body().getUsers()) {
                     if (user.getEmail().toString().equals(email.getText().toString())) {
                         used = used + 1;
                     }
@@ -107,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
-                }*/
+                }
             }
 
             @Override
