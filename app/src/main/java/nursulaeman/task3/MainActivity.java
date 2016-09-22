@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false, login;
     TextView tv_respond0;
     EditText email, pass;
-    String sEmail, sName, sPass, sToken;
+    String sEmail, sName, sPass, sToken, s_cek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +47,21 @@ public class MainActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.et_log_1);
         pass = (EditText) findViewById(R.id.et_log_2);
 
+        // login session
+        SharedPreferences get_shared_preference = getSharedPreferences("authentication", MODE_PRIVATE);
+        if (!get_shared_preference.getString("name", "").equals("")) {
+            Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
+            startActivity(i);
+            finish();
+        }
+
         mAwesomeValidation.addValidation(MainActivity.this, R.id.et_log_1, Patterns.EMAIL_ADDRESS, R.string.err_email);
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!mAwesomeValidation.validate()) {
-                   email.requestFocus();
+                    email.requestFocus();
                 } else {
                     getApi();
                 }
@@ -62,10 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void register (View v)
-    {
-        Intent i=new Intent();
-        i.setClass(this,RegisterActivity.class);
+    public void register(View v) {
+        Intent i = new Intent();
+        i.setClass(this, RegisterActivity.class);
         startActivity(i);
     }
 
@@ -80,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
@@ -142,3 +149,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
