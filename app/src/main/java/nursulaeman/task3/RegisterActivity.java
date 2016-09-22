@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +26,9 @@ public class RegisterActivity extends AppCompatActivity {
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
     Button btn_register;
     TextView tv_respond;
-    EditText email, pass1, pass2;
+    EditText email, name, pass1, pass2;
+    String sEmail, sName, sPass;
+    int go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAwesomeValidation.addValidation(RegisterActivity.this, R.id.et_reg_1, Patterns.EMAIL_ADDRESS, R.string.err_email);
         mAwesomeValidation.addValidation(RegisterActivity.this, R.id.et_reg_4, "[a-zA-Z\\s]+", R.string.err_name);
         email = (EditText) findViewById(R.id.et_reg_1);
+        name = (EditText) findViewById(R.id.et_reg_4);
         pass1 = (EditText) findViewById(R.id.et_reg_2);
         pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
@@ -43,10 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sEmail = email.getText().toString();
+                sName = name.getText().toString();
+                sPass = pass1.getText().toString();
                 if (!mAwesomeValidation.validate()) {
                     email.requestFocus();
-                }
-                else if (!validatePass1(pass1.getText().toString())) {
+                } else if (!validatePass1(pass1.getText().toString())) {
                     pass1.setError("Invalid Password");
                     pass1.requestFocus();
                 } else if (!pass2.getText().toString().equals(pass1.getText().toString())) {
@@ -55,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(RegisterActivity.this, "Input Success", Toast.LENGTH_LONG).show();
                     getApi();
+                    postApi();
                 }
             }
         });
@@ -76,30 +83,61 @@ public class RegisterActivity extends AppCompatActivity {
                 .baseUrl("https://private-6d28c-task32.apiary-mock.com/users/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        UserApi user_api = retrofit.create(UserApi.class);
+        final UserApi user_api = retrofit.create(UserApi.class);
 
-        // // implement interface for get all user
+        // implement interface for get all user
         Call<Users> call = user_api.getUsers();
         call.enqueue(new Callback<Users>() {
 
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 int status = response.code();
+                tv_respond.setText("");
                 tv_respond.setText(String.valueOf(status));
                 //this extract data from retrofit with for() loop
-                for(Users.UserItem user : response.body().getUsers()) {
+                for (Users.UserItem user : response.body().getUsers()) {
                     if (user.getEmail().toString().equals(email.getText().toString())) {
                         Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
                         break;
                     } else {
-                    // implement interface for add user
-                        Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
+                        go = go + 1;
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
+                tv_respond.setText(String.valueOf(t));
+            }
+
+        });
+    }
+
+    private void postApi() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://private-6d28c-task32.apiary-mock.com/users/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        final UserApi user_api = retrofit.create(UserApi.class);
+
+        // implement interface for add user
+
+        User user_save = new User(sEmail, sName, sPass);
+        Call<User> call2 = user_api.saveUser(user_save);
+
+        call2.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                int status2 = response.code();
+                tv_respond.setText(String.valueOf(status2));
+                Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<User> call2, Throwable t) {
                 tv_respond.setText(String.valueOf(t));
             }
         });
