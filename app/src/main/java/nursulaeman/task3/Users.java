@@ -1,5 +1,6 @@
 package nursulaeman.task3;
 
+import com.google.common.hash.HashCode;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -19,6 +20,15 @@ public class Users {
         private String email;
         private String name;
         private String password;
+        private String token_authentication;
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
 
         public int getId() {
             return id;
@@ -44,12 +54,13 @@ public class Users {
             this.name = name;
         }
 
-        public String getPassword() {
-            return password;
+        public String getToken_authentication() {
+            return token_authentication;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
+        public void setToken_authentication(String token_authentication) {
+            this.token_authentication = token_authentication;
         }
+
     }
 }

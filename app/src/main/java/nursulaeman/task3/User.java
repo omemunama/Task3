@@ -8,11 +8,13 @@ public class User {
     private String email;
     private String name;
     private String password;
+    private String token_authentication;
 
-    public User(String email, String name, String password) {
+    public User(String email, String name, String password, String token_authentication) {
         this.email = email;
         this.name = name;
         this.password = password;
+        this.token_authentication = token_authentication;
     }
 
     public int getId() {
@@ -45,5 +47,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getToken_authentication() {
+        return token_authentication;
+    }
+
+    public void setToken_authentication(String token_authentication) {
+        this.token_authentication = token_authentication;
     }
 }

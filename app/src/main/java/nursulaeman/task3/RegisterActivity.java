@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btn_register;
     TextView tv_respond;
     EditText email, name, pass1, pass2;
-    String sEmail, sName, sPass;
+    String sEmail, sName, sPass, sToken;
     int go;
 
     @Override
@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                 sEmail = email.getText().toString();
                 sName = name.getText().toString();
                 sPass = pass1.getText().toString();
+                sToken = "gsadug90sajvdfgaf";
                 if (!mAwesomeValidation.validate()) {
                     email.requestFocus();
                 } else if (!validatePass1(pass1.getText().toString())) {
@@ -125,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // implement interface for add user
 
-        User user_save = new User(sEmail, sName, sPass);
+        User user_save = new User(sEmail, sName, sPass, sToken);
         Call<User> call2 = user_api.saveUser(user_save);
 
         call2.enqueue(new Callback<User>() {
