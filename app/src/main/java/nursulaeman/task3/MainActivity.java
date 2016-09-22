@@ -1,6 +1,7 @@
 package nursulaeman.task3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false, login;
     TextView tv_respond0;
     EditText email, pass;
+    String sEmail, sName, sPass, sToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +110,24 @@ public class MainActivity extends AppCompatActivity {
                             user.getPassword().toString().equals(pass.getText().toString())) {
                         Toast.makeText(MainActivity.this, "email password valid", Toast.LENGTH_LONG).show();
                         login = true;
+
+                        sEmail = user.getEmail();
+                        sName = user.getName();
+                        sPass = user.getPassword();
+                        sToken = user.getToken_authentication();
+
+                        SharedPreferences set_shared_preference = getSharedPreferences("authentication", MODE_PRIVATE);
+                        SharedPreferences.Editor sp_editor = set_shared_preference.edit();
+                        sp_editor.putString("email", sEmail);
+                        sp_editor.putString("name", sName);
+                        sp_editor.putString("password", sPass);
+                        sp_editor.putString("token_authentication", sToken);
+                        sp_editor.commit();
+
                         Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
                         startActivity(i);
                         finish();
+
                         break;
                     } else {
                         Toast.makeText(MainActivity.this, "invalid email password", Toast.LENGTH_LONG).show();

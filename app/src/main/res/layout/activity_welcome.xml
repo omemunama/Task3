@@ -15,6 +15,7 @@
         android:background="@drawable/shape1">
 
         <TextView
+            android:id="@+id/tv_shared_preference"
             style="@style/tv_st_1"
             android:text="Welcome" />
 
