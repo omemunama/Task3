@@ -86,7 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:id="@+id/tv_result" />
+            android:text="test"
+            android:id="@+id/tv_respond" />
 
     </LinearLayout>
 

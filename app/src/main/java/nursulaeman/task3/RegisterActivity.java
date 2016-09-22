@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
     Button btn_register;
-    TextView tv_result, tv_result_api;
+    TextView tv_respond, tv_result_api;
     EditText email, pass1, pass2;
     int used;
 
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         pass1 = (EditText) findViewById(R.id.et_reg_2);
         pass2 = (EditText) findViewById(R.id.et_reg_3);
         btn_register = (Button) findViewById(R.id.btn_reg);
-        tv_result = (TextView) findViewById(R.id.tv_result);
+        tv_respond = (TextView) findViewById(R.id.tv_respond);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,9 +86,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 int status = response.code();
-                tv_result.setText(String.valueOf(status));
+                tv_respond.setText(String.valueOf(status));
                 //this extract data from retrofit with for() loop
-                for(Users.UserItem user : response.body().getUsers()) {
+                /*for(Users.UserItem user : response.body().getUsers()) {
                     tv_result_api.append(
                             "Id = " + String.valueOf(user.getId()) +
                                     System.getProperty("line.separator") +
@@ -107,12 +107,12 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(RegisterActivity.this, "registration is successful", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
-                tv_result.setText(String.valueOf(t));
+                tv_respond.setText(String.valueOf(t));
             }
         });
     }
