@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
     Button btn_login;
     boolean doubleBackToExitPressedOnce = false, login;
-    TextView tv_regres;
+    TextView tv_respond0;
     EditText email, pass;
 
     @Override
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_reg = (TextView) findViewById(R.id.tv_reg);
         tv_reg.setPaintFlags(tv_reg.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        tv_regres = (TextView) findViewById(R.id.tv_regres);
+        tv_respond0 = (TextView) findViewById(R.id.tv_respond0);
         email = (EditText) findViewById(R.id.et_log_1);
         pass = (EditText) findViewById(R.id.et_log_2);
 
@@ -73,12 +73,9 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
             return;
         }
-
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
-
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 doubleBackToExitPressedOnce=false;
@@ -103,19 +100,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 int status = response.code();
-                tv_regres.setText(String.valueOf(status));
+                tv_respond0.setText(String.valueOf(status));
                 //this extract data from retrofit with for() loop
                 for (Users.UserItem user : response.body().getUsers()) {
-                    /*tv_result_api.append(
-                            "Id = " + String.valueOf(user.getId()) +
-                                    System.getProperty("line.separator") +
-                                    "Email = " + user.getEmail() +
-                                    System.getProperty("line.separator") +
-                                    "Name = " + user.getName() +
-                                    System.getProperty("line.separator") +
-                                    "Password = " + user.getPassword() +
-                                    System.getProperty("line.separator")
-                    );*/
                     login = false;
                     if (user.getEmail().toString().equals(email.getText().toString()) &&
                             user.getPassword().toString().equals(pass.getText().toString())) {
@@ -127,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
-                tv_regres.setText(String.valueOf(t));
+                tv_respond0.setText(String.valueOf(t));
             }
         });
     }

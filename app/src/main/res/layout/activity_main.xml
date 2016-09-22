@@ -71,8 +71,10 @@
             android:text="Register" />
 
         <TextView
-            android:id="@+id/tv_regres"
-            style="@style/tv_st_2" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:id="@+id/tv_respond0" />
 
     </LinearLayout>
 

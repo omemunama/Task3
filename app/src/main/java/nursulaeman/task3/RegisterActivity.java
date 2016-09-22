@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                     pass2.requestFocus();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Input Success", Toast.LENGTH_LONG).show();
-                    getApi();
+                    //getApi();
                     postApi();
                 }
             }
