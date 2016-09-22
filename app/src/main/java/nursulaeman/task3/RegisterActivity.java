@@ -28,7 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     TextView tv_respond;
     EditText email, name, pass1, pass2;
     String sEmail, sName, sPass, sToken;
-    int go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                     pass2.requestFocus();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Input Success", Toast.LENGTH_LONG).show();
-                    //getApi();
-                    postApi();
+                    getApi();
                 }
             }
         });
@@ -101,7 +99,8 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "email already in use", Toast.LENGTH_LONG).show();
                         break;
                     } else {
-                        go = go + 1;
+                        postApi();
+                        break;
                     }
                 }
             }
