@@ -108,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
                             user.getPassword().toString().equals(pass.getText().toString())) {
                         Toast.makeText(MainActivity.this, "email password valid", Toast.LENGTH_LONG).show();
                         login = true;
+                        Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
+                        startActivity(i);
+                        finish();
                         break;
                     } else {
                         Toast.makeText(MainActivity.this, "invalid email password", Toast.LENGTH_LONG).show();
