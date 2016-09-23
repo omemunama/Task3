@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // login session
         SharedPreferences get_shared_preference = getSharedPreferences("authentication", MODE_PRIVATE);
-        if (!get_shared_preference.getString("name", "").equals("")) {
+        if (!get_shared_preference.getString("token_authentication", "").equals("")) {
             Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(i);
             finish();
