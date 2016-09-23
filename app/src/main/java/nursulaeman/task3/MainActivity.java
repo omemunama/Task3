@@ -1,5 +1,6 @@
 package nursulaeman.task3;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false, login;
     TextView tv_respond0;
     EditText email, pass;
-    String sEmail, sName, sPass, sToken, s_cek;
+    String sEmail, sName, sPass, sToken;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,14 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setTitle("Login on Process");
+                progressDialog.setMessage("Loading ...");
+                progressDialog.setProgress(0);
                 if (!mAwesomeValidation.validate()) {
                     email.requestFocus();
                 } else {
+                    progressDialog.show();
                     getApi();
                 }
             }
@@ -109,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 int status = response.code();
+                progressDialog.dismiss();
                 tv_respond0.setText(String.valueOf(status));
                 //this extract data from retrofit with for() loop
                 for (Users.UserItem user : response.body().getUsers()) {
@@ -144,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
+                progressDialog.dismiss();
                 tv_respond0.setText(String.valueOf(t));
             }
         });
