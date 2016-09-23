@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://private-6d28c-task32.apiary-mock.com/users/")
+                .baseUrl("https://private-6d28c-task32.apiary-mock.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         final UserApi user_api = retrofit.create(UserApi.class);
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://private-6d28c-task32.apiary-mock.com/users/")
+                .baseUrl("https://private-6d28c-task32.apiary-mock.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         final UserApi user_api = retrofit.create(UserApi.class);

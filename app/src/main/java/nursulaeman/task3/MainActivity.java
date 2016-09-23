@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://private-6d28c-task32.apiary-mock.com/users/")
+                .baseUrl("https://private-6d28c-task32.apiary-mock.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         UserApi user_api = retrofit.create(UserApi.class);
